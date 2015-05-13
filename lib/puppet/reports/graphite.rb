@@ -8,8 +8,13 @@ Puppet::Reports.register_report(:graphite) do
   configfile = File.join([File.dirname(Puppet.settings[:config]), "graphite.yaml"])
   raise(Puppet::ParseError, "Graphite report config file #{configfile} not readable") unless File.exist?(configfile)
   config = YAML.load_file(configfile)
+
   GRAPHITE_SERVER = config[:graphite_server]
-  GRAPHITE_PORT = config[:graphite_port]
+  GRAPHITE_PORT   = config[:graphite_port]
+
+  raise(Puppet::ParseError, "Graphite config must include 'graphite_server'") unless GRAPHITE_SERVER
+  raise(Puppet::ParseError, "Graphite config must include 'graphite_port'")   unless GRAPHITE_PORT
+  raise(Puppet::ParseError, "graphite_port must be a number") unless GRAPHITE_PORT =~ /^\d+$/
 
   desc <<-DESC
   Send notification of failed reports to a Graphite server via socket.
