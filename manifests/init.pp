@@ -65,6 +65,7 @@ class graphite_reporter (
 
 ) inherits graphite_reporter::params {
 
+  validate_string($graphite_host, $config_file, $config_owner, $config_group)
   validate_bool($use_fqdn_tree, $append_puppet_to_prefix)
 
   file { $config_file:
