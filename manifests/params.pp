@@ -11,8 +11,8 @@ class graphite_reporter::params {
 
   if $::is_pe {
     $config_file  = '/etc/puppetlabs/puppet/graphite.yaml'
-    $config_owner = 'pe_puppet'
-    $config_group = 'pe_puppet'
+    $config_owner = 'pe-puppet'
+    $config_group = 'pe-puppet'
   } elsif versioncmp('4.0.0', $::puppetversion) < 1 {
     $config_file  = '/etc/puppetlabs/puppet/graphite.yaml'
     $config_owner = 'puppet'
