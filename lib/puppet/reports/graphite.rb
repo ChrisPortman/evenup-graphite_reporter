@@ -66,5 +66,13 @@ Puppet::Reports.register_report(:graphite) do
         send_metric "#{name} #{value} #{epochtime}"
       }
     }
+    
+    self.resource_statuses.each { |resource,data|
+      resource = data.resource.gsub('/','_').gsub('.','_')
+      name     = "#{prefix}.resources.#{resource}.evaluation_time"
+      value    = data.evaluation_time
+
+      send_metric "#{name} #{value} #{epochtime}"
+    }
   end
 end
