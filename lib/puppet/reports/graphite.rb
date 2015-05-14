@@ -60,7 +60,7 @@ Puppet::Reports.register_report(:graphite) do
 
     self.metrics.each { |metric,data|
       data.values.each { |val| 
-        name = "#{prefix}.#{val[1]}_#{metric}"
+        name = "#{prefix}.metrics.#{metric}.#{val[1]}"
         value = val[2]
 
         send_metric "#{name} #{value} #{epochtime}"
